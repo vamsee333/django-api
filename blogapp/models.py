@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+from rest_framework.reverse import reverse as api_reverse
 # Create your models here.
 class Blogpost(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -10,5 +12,10 @@ class Blogpost(models.Model):
     def __str__(self):
         return str(self.user.username)
 
+    @property
+    def owner(self):
+        return self.user
 
+    def get_api_url(self):
+        return api_reverse("blog-post",kwargs={'pk':self.pk})
 

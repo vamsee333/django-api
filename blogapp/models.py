@@ -16,6 +16,6 @@ class Blogpost(models.Model):
     def owner(self):
         return self.user
 
-    def get_api_url(self):
-        return api_reverse("blog-post",kwargs={'pk':self.pk})
+    def get_api_url(self,request=None):
+        return api_reverse("blog-post",kwargs={'pk':self.pk},request=request)
 
